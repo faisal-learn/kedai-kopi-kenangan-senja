@@ -49,28 +49,66 @@ document.addEventListener("click", function(e) {
 
 
 // Modal
-const itemDetailModal = document.querySelector('#item-detail-modal');
-const itemDetailButtons = document.querySelectorAll('.item-detail-button');
-const closeButton = document.querySelector('.modal .close-icon');
+// const itemDetailModal = document.querySelector('#item-detail-modal');
+// const itemDetailButtons = document.querySelectorAll('.item-detail-button');
+// const closeButton = document.querySelector('.modal .close-icon');
 
-itemDetailButtons.forEach((btn) => {
-  btn.onclick = (e) => {
-    console.log('tes')
-    itemDetailModal.style.display = "flex";
-    e.preventDefault();
-  };
-});
+// itemDetailButtons.forEach((btn) => {
+//   btn.onclick = (e) => {
+//     console.log('tes')
+//     itemDetailModal.style.display = "flex";
+//     e.preventDefault();
+//   };
+// });
 
-// itemDetailButton.onclick = (e) => {
-//   itemDetailModal.style.display = "flex";
+// // itemDetailButton.onclick = (e) => {
+// //   itemDetailModal.style.display = "flex";
+// //   e.preventDefault();
+// // }
+
+// // klik tombol icon
+// closeButton.onclick = (e) => {
+//   itemDetailModal.style.display = "none";
 //   e.preventDefault();
 // }
 
-// klik tombol icon
-closeButton.onclick = (e) => {
-  itemDetailModal.style.display = "none";
-  e.preventDefault();
-}
+const itemDetailModal = document.querySelector('#item-detail-modal');
+const closeButton = document.querySelector('.modal .close-icon');
+
+document.addEventListener('click', (e) => {
+  // klik tombol detail
+  const btn = e.target.closest('.item-detail-button');
+  if (btn) {
+    e.preventDefault();
+
+    // ambil data dari tombol
+    const name = btn.dataset.name;
+    const price = btn.dataset.price;
+    const desc = btn.dataset.desc;
+    const img = btn.dataset.img;
+
+    // isi modal
+    itemDetailModal.querySelector('.modal-content img').src = `img/products/${img}`;
+    itemDetailModal.querySelector('.modal-content h3').textContent = name;
+    itemDetailModal.querySelector('.modal-content p').textContent = desc;
+    itemDetailModal.querySelector('.modal-content .product-price').textContent = `IDR ${price}`;
+
+    // tampilkan modal
+    itemDetailModal.style.display = 'flex';
+    feather.replace(); // update icon di modal
+  }
+
+  // klik tombol close
+  if (e.target.closest('.close-icon')) {
+    e.preventDefault();
+    itemDetailModal.style.display = 'none';
+  }
+
+  // klik di luar modal
+  if (e.target === itemDetailModal) {
+    itemDetailModal.style.display = 'none';
+  }
+});
 
 // klik di luar modal
  window.onclick = (e) => {

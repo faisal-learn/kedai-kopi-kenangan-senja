@@ -24,6 +24,14 @@
 
      <!-- App -->
       <script src="src/app.js" async></script>
+
+      <!-- Midtrans -->
+
+      <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
+    <script type="text/javascript"
+      src="https://app.sandbox.midtrans.com/snap/snap.js"
+      data-client-key="Mid-client-odXr6xppyMcc6S1W"></script>
+    <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
   </head>
 
   <body>
@@ -207,7 +215,10 @@
               <use href="img/feather-sprite.svg#shopping-cart" />
             </svg>
           </a>
-          <a href="" class="item-detail-button">
+          <a href="" class="item-detail-button"
+          :data-name="item.name"
+          :data-price="item.price"
+          :data-img="item.img">
             <svg
               width="24"
               height="24"
